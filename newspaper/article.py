@@ -212,7 +212,10 @@ class Article(object):
             output_formatter.update_language(self.meta_lang)
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
-        self.set_meta_favicon(meta_favicon)
+        if meta_favicon == '':
+            self.set_meta_favicon(self.url + "/favicon.ico")
+        else:
+            self.set_meta_favicon(meta_favicon)
 
         meta_description = \
             self.extractor.get_meta_description(self.clean_doc)
@@ -525,7 +528,7 @@ class Article(object):
             raise ArticleException()
 
     def throw_if_not_parsed_verbose(self):
-        """Parse `is_parsed` status -> log readable status 
+        """Parse `is_parsed` status -> log readable status
         -> maybe throw ArticleException
         """
         if not self.is_parsed:

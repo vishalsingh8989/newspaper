@@ -397,8 +397,10 @@ class ContentExtractor(object):
         """
         kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
         meta = self.parser.getElementsByTag(doc, **kwargs)
+        print(meta)
         if meta:
             favicon = self.parser.getAttribute(meta[0], 'href')
+
             return favicon
         return ''
 
